@@ -1,0 +1,17 @@
+.button {
+	min-height: 42px;
+	padding: 0 18px;
+	border: 0;
+	border-radius: 7px;
+	background: #4f8bea;
+	color: #fff;
+	font: inherit;
+	font-size: 14px;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.button:disabled {
+	background: #aab2c3;
+	cursor: not-allowed;
+}

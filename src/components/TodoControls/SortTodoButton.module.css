@@ -1,0 +1,26 @@
+.sort_button {
+	display: inline-flex;
+	min-height: 36px;
+	align-items: center;
+	gap: 7px;
+	padding: 0 10px;
+	border: 1px solid transparent;
+	border-radius: 6px;
+	background: transparent;
+	color: #647781;
+	font: inherit;
+	font-size: 13px;
+	cursor: pointer;
+}
+
+.sort_button:hover,
+.sort_active {
+	border-color: #c8dcf7;
+	background: #e4efff;
+	color: #3473c9;
+}
+
+.sort_button:focus-visible {
+	outline: 2px solid #4f8bea;
+	outline-offset: 2px;
+}

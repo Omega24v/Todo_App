@@ -1,0 +1,69 @@
+.todo {
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 14px;
+	width: 100%;
+	min-height: 60px;
+	padding: 10px 12px 10px 16px;
+	border: 1px solid #e7eef0;
+	border-radius: 8px;
+	background: #fff;
+	box-shadow: 0 2px 7px rgba(34, 61, 72, 0.04);
+}
+
+.todo_text {
+	flex: 1;
+	min-width: 0;
+	margin: 0;
+	padding: 5px;
+	color: #263741;
+	line-height: 1.5;
+	overflow-wrap: anywhere;
+	border: none;
+}
+
+.todo_text-active {
+	border: 2px solid #4f8bea
+}
+
+.todo_actions {
+	display: flex;
+	flex-shrink: 0;
+	gap: 8px;
+}
+
+.icon_button {
+	display: inline-flex;
+	width: 38px;
+	height: 38px;
+	align-items: center;
+	justify-content: center;
+	border: 0;
+	border-radius: 6px;
+	color: #fff;
+	cursor: pointer;
+}
+
+.button_edit {
+	background: #4f8bea;
+}
+
+.button_delete {
+	background: #e85b5b;
+}
+
+.icon_button:hover:not(:disabled) {
+	filter: brightness(0.92);
+}
+
+.icon_button:focus-visible {
+	outline: 3px solid #263b34;
+	outline-offset: 2px;
+}
+
+.icon_button:disabled {
+	opacity: 0.55;
+	cursor: not-allowed;
+}
