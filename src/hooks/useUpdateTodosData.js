@@ -1,37 +1,29 @@
 import { useState } from "react";
-import { API_BASE_URL } from "../api";
+import { ref, update } from "firebase/database";
+import { db } from "../firebase";
 
 export const useUpdateTodosData = (
 	setSearchInput,
 	setSearchQuery,
-	refreshTodos,
 ) => {
 	const [isTodoUpdating, setIsTodoUpdating] = useState(false);
 
 	const updateTodoData = (todoId, todoText) => {
-		const db = `${API_BASE_URL}/todos/${todoId}`;
-
 		const todoTextTrim = todoText.trim();
 
 		if (!todoTextTrim) {
 			return;
 		}
-
 		setIsTodoUpdating(true);
 
-		fetch(db, {
-			method: "PUT",
-			headers: { "Content-Type": "application/json;charset=utf-8" },
-			body: JSON.stringify({
-				text: todoTextTrim,
-			}),
+		const todoDbRef = ref(db, `todos/${todoId}`);
+
+		update(todoDbRef, {
+			text: todoTextTrim,
 		})
-			.then((response) => response.json())
-			.then((answer) => {
-				console.log("Ответ от сервера: Задание обновлено", answer);
+			.then(() => {
 				setSearchInput("");
 				setSearchQuery("");
-				refreshTodos();
 			})
 			.catch((error) => console.log(error))
 			.finally(() => setIsTodoUpdating(false));

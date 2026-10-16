@@ -3,7 +3,6 @@ import {
 	useDebouncedSearch,
 	useDeleteTodosFromData,
 	useGetTodosData,
-	useRefreshTodos,
 	useUpdateTodosData,
 } from "./hooks";
 import { useState } from "react";
@@ -22,11 +21,8 @@ export const App = () => {
 	const [searchQuery, setSearchQuery] = useState("");
 	const [isSorted, setIsSorted] = useState(false);
 
-	const { refreshTodosFlag, refreshTodos } = useRefreshTodos();
-
-	const { isLoaded, dataTodos } = useGetTodosData(refreshTodosFlag);
+	const { isLoaded, dataTodos } = useGetTodosData();
 	const { isTodoCreating, addTodoData } = useAddTodosData(
-		refreshTodos,
 		searchInput,
 		setSearchInput,
 		setSearchQuery,
@@ -34,10 +30,9 @@ export const App = () => {
 	const { isTodoUpdating, updateTodoData } = useUpdateTodosData(
 		setSearchInput,
 		setSearchQuery,
-		refreshTodos,
 	);
 	const { isTodoDelete, deleteTodoFromData } =
-		useDeleteTodosFromData(refreshTodos);
+		useDeleteTodosFromData();
 
 	const handleSearchChange = ({ target }) => {
 		const value = target.value;

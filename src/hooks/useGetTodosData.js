@@ -1,19 +1,27 @@
 import { useEffect, useState } from "react";
-import { API_BASE_URL } from "../api";
+import { onValue, ref } from "firebase/database";
+import { db } from "../firebase";
 
-export const useGetTodosData = (refreshTodosFlag) => {
+export const useGetTodosData = () => {
 	const [dataTodos, setDataTodos] = useState([]);
 	const [isLoaded, setIsLoaded] = useState(false);
 
-	const db = `${API_BASE_URL}/todos`;
-
 	useEffect(() => {
-		fetch(db)
-			.then((response) => response.json())
-			.then((todoData) => setDataTodos(todoData))
-			.catch((error) => console.log(error))
-			.finally(() => setIsLoaded(true));
-	}, [db, refreshTodosFlag]);
+		const todoDbRef = ref(db, "todos");
+
+		return onValue(todoDbRef, (snapshot) => {
+			const loadedTodos = snapshot.val() || {};
+			const todosArray = Object.entries(loadedTodos).map(
+				([id, todo]) => ({
+					...todo,
+					id
+				}),
+			);
+
+			setDataTodos(todosArray);
+			setIsLoaded(true);
+		});
+	}, []);
 
 	return {
 		isLoaded,

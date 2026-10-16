@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { API_BASE_URL } from "../api";
+import { ref, push } from "firebase/database";
+import { db } from "../firebase";
 
 export const useAddTodosData = (
-	refreshTodos,
 	searchInput,
 	setSearchInput,
 	setSearchQuery,
@@ -16,21 +16,16 @@ export const useAddTodosData = (
 			return;
 		}
 
-		const db = `${API_BASE_URL}/todos`;
-
 		setIsTodoCreating(true);
+		const todoDbRef = ref(db, "todos");
 
-		fetch(db, {
-			method: "POST",
-			headers: { "Content-Type": "application/json;charset=utf-8" },
-			body: JSON.stringify({ text: searchInputTrim }),
+		push(todoDbRef, {
+			text: searchInputTrim,
 		})
-			.then((response) => response.json())
 			.then((answer) => {
 				console.log("Ответ от сервера: Задание добавлено", answer);
 				setSearchInput("");
 				setSearchQuery("");
-				refreshTodos();
 			})
 			.catch((error) => console.log(error))
 			.finally(() => setIsTodoCreating(false));
