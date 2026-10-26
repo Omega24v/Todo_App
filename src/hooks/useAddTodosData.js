@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { API_BASE_URL } from "../api";
+import { isSearchInputEmpty } from "../utils";
 
 export const useAddTodosData = (
 	refreshTodos,
@@ -8,9 +9,10 @@ export const useAddTodosData = (
 	setSearchQuery,
 ) => {
 	const [isTodoCreating, setIsTodoCreating] = useState(false);
+	const isAddTodoDisabled = isSearchInputEmpty(searchInput);
 
 	const addTodoData = () => {
-		const searchInputTrim = searchInput.trim();
+		let searchInputTrim = searchInput.trim();
 
 		if (!searchInputTrim) {
 			return;
@@ -38,6 +40,7 @@ export const useAddTodosData = (
 
 	return {
 		isTodoCreating,
+		isAddTodoDisabled,
 		addTodoData,
 	};
 };

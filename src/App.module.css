@@ -9,6 +9,33 @@
 	color-scheme: light;
 }
 
+.task_page {
+	display: flex;
+	min-height: 100vh;
+	min-height: 100svh;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	box-sizing: border-box;
+	gap: 6px;
+	padding: 28px 16px;
+}
+
+.task_app {
+	display: block;
+	width: min(100%, 540px);
+	min-height: 0;
+	padding: 0;
+}
+
+.home_link {
+	padding: 6px 10px;
+	border-radius: 6px;
+	background: #eff8fa;
+	color: #263741;
+	text-align: center;
+}
+
 .todo_panel {
 	box-sizing: border-box;
 	width: min(100%, 540px);
@@ -17,6 +44,114 @@
 	border-radius: 18px;
 	background: #eff8fa;
 	box-shadow: 0 18px 48px rgba(28, 55, 98, 0.2);
+}
+
+.todo {
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 14px;
+	width: 100%;
+	min-height: 60px;
+	padding: 10px 12px 10px 16px;
+	border: 1px solid #e7eef0;
+	border-radius: 8px;
+	background: #fff;
+	box-shadow: 0 2px 7px rgba(34, 61, 72, 0.04);
+}
+
+.todo_text {
+	flex: 1;
+	min-width: 0;
+	margin: 0;
+	padding: 5px;
+	color: #263741;
+	line-height: 1.5;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	border: none;
+}
+
+.todo_detail_list {
+	display: flex;
+	flex-direction: column;
+	gap: 11px;
+	padding: 2px 3px 4px;
+}
+
+.todo_detail {
+	align-items: flex-start;
+}
+
+.todo_detail_text {
+	flex: 1;
+	min-width: 0;
+	margin: 0;
+	padding: 5px;
+	color: #263741;
+	line-height: 1.5;
+	white-space: pre-wrap;
+	overflow-wrap: anywhere;
+}
+
+.todo_detail_editor {
+	flex: 1;
+	min-width: 0;
+	min-height: 120px;
+	box-sizing: border-box;
+	padding: 8px;
+	border: 2px solid #4f8bea;
+	border-radius: 6px;
+	color: #263741;
+	font: inherit;
+	line-height: 1.5;
+	resize: vertical;
+}
+
+.todo_text-active {
+	border: 2px solid #4f8bea;
+}
+
+.todo_actions {
+	display: flex;
+	flex-shrink: 0;
+	gap: 8px;
+}
+
+.icon_button {
+	display: inline-flex;
+	width: 38px;
+	height: 38px;
+	align-items: center;
+	justify-content: center;
+	border: 0;
+	border-radius: 6px;
+	color: #fff;
+	cursor: pointer;
+}
+
+.button_edit {
+	background: #4f8bea;
+}
+
+.button_delete {
+	background: #e85b5b;
+}
+
+.icon_button:hover:not(:disabled) {
+	filter: brightness(0.92);
+}
+
+.icon_button:focus-visible {
+	outline: 3px solid #263b34;
+	outline-offset: 2px;
+}
+
+.icon_button:disabled {
+	opacity: 0.55;
+	cursor: not-allowed;
 }
 
 .loader {

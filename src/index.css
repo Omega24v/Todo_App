@@ -55,6 +55,37 @@ body {
 	margin: 0;
 }
 
+a {
+	display: inline-block;
+	color: inherit;
+	text-decoration: none;
+	transition:
+		color 180ms ease,
+		transform 180ms ease,
+		box-shadow 180ms ease;
+}
+
+a:hover {
+	color: var(--accent);
+	transform: translateY(-2px);
+}
+
+a:focus-visible {
+	border-radius: 4px;
+	outline: 2px solid var(--accent);
+	outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	a {
+		transition: none;
+	}
+
+	a:hover {
+		transform: none;
+	}
+}
+
 #root {
 	width: 100%;
 	margin: 0;

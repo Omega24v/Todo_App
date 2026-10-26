@@ -1,11 +1,7 @@
 import { useState } from "react";
 import { API_BASE_URL } from "../api";
 
-export const useUpdateTodosData = (
-	setSearchInput,
-	setSearchQuery,
-	refreshTodos,
-) => {
+export const useUpdateTodosData = (refreshTodos) => {
 	const [isTodoUpdating, setIsTodoUpdating] = useState(false);
 
 	const updateTodoData = (todoId, todoText) => {
@@ -19,21 +15,25 @@ export const useUpdateTodosData = (
 
 		setIsTodoUpdating(true);
 
-		fetch(db, {
+		return fetch(db, {
 			method: "PUT",
 			headers: { "Content-Type": "application/json;charset=utf-8" },
 			body: JSON.stringify({
 				text: todoTextTrim,
 			}),
 		})
-			.then((response) => response.json())
-			.then((answer) => {
-				console.log("Ответ от сервера: Задание обновлено", answer);
-				setSearchInput("");
-				setSearchQuery("");
-				refreshTodos();
+			.then((response) => {
+				if (!response.ok) {
+					throw new Error(`Ошибка сервера: ${response.status}`);
+				}
+
+				return response.json();
 			})
-			.catch((error) => console.log(error))
+			.then((updatedTodo) => {
+				console.log("Ответ от сервера: Задание обновлено", updatedTodo);
+				refreshTodos();
+				return updatedTodo;
+			})
 			.finally(() => setIsTodoUpdating(false));
 	};
 

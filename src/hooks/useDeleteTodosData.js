@@ -4,8 +4,8 @@ import { API_BASE_URL } from "../api";
 export const useDeleteTodosFromData = (refreshTodos) => {
 	const [isTodoDelete, setIsDelete] = useState(false);
 
-	const deleteTodoFromData = (todoId) => {
-		const db = `${API_BASE_URL}/todos/${todoId}`;
+	const deleteTodoFromData = (id) => {
+		const db = `${API_BASE_URL}/todos/${id}`;
 
 		setIsDelete(true);
 
@@ -14,12 +14,10 @@ export const useDeleteTodosFromData = (refreshTodos) => {
 		})
 			.then((response) => {
 				if (!response.ok) {
-					throw new Error("Ошибка, такой задачи не существует!");
+					throw new Error(`Ошибка сервера: ${response.status}`);
 				}
-
 				refreshTodos();
 			})
-			.catch((error) => console.log(error))
 			.finally(() => setIsDelete(false));
 	};
 
